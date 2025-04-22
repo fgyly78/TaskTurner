@@ -1,0 +1,20 @@
+﻿<Application x:Class="TaskTurner.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:TaskTurner"
+             xmlns:vm="clr-namespace:TaskTurner.ViewModel"
+             xmlns:m="clr-namespace:TaskTurner.Models"
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             StartupUri="Views/MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Dictionaries/Animations.xaml"/>
+                <ResourceDictionary Source="/Dictionaries/Colors.xaml"/>
+                <ResourceDictionary Source="/Dictionaries/Icons.xaml"/>
+                <ResourceDictionary Source="/Dictionaries/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

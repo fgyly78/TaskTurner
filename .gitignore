@@ -1,0 +1,15 @@
+# Visual Studio
+.vs/
+.vsconfig
+.vscode/
+# Индексы
+*.vsidx
+# Временные файлы
+bin/
+obj/
+
+# Файлы, генерируемые при сборке
+*.pdb
+*.exe
+*.dll
+*.cache
