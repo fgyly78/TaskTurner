@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using TaskTurner.Infrastructure.Commands;
 using TaskTurner.Models;
 using TaskTurner.Views;
 
@@ -13,8 +14,17 @@ using TaskTurner.Views;
 
 namespace TaskTurner.ViewModel
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    internal class MainWindowViewModel : ViewModel
     {
+        public ICommand IOpenNewWindow { get; }
+        public MainWindowViewModel()
+        {
+            IOpenNewWindow = new OpenNewWindowCommand();
+        }
+
+        #region Properties
+
+        #region Animation of Imprtance badge in NewTaskWindow
 
         private TaskImportance _selectedTaskImportance;
 
@@ -31,6 +41,10 @@ namespace TaskTurner.ViewModel
             }
         }
 
+        #endregion
+
+        #region Update time
+
         private DateTime? _myTime = DateTime.Now;
         public DateTime? MyTime
         {
@@ -42,19 +56,9 @@ namespace TaskTurner.ViewModel
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
 
-        public ICommand IOpenWindow => new RelayCommand(OpenNewWindow);
+        #endregion
 
-        private void OpenNewWindow()
-        {
-            NewTaskWindow newTaskWindow = new NewTaskWindow();
-            newTaskWindow.Show();
-        }
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            this.OnPropertyChanged();
-        }
     }
 }

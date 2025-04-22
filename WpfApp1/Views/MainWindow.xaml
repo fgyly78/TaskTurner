@@ -6,10 +6,14 @@
         xmlns:local="clr-namespace:TaskTurner"
         xmlns:vm="clr-namespace:TaskTurner.ViewModel"
         xmlns:m="clr-namespace:TaskTurner.Models"
+        xmlns:cmd="clr-namespace:TaskTurner.Infrastructure.Commands"
         mc:Ignorable="d"
         Title="MainWindow" Height="830" Width="1280"
         MinHeight="600" MinWidth="1000" ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <cmd:OpenNewWindowCommand x:Key="IOpenNewWindow"/>
+    </Window.Resources>
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
@@ -68,7 +72,7 @@
             <!--Button-->
             <Button Style="{StaticResource RoundButton}"
                     Width="40" Height="40" HorizontalAlignment="Right"
-                    Command="{Binding IOpenWindow}">
+                    Command="{StaticResource IOpenNewWindow}">
 
                 <!--Icon-->
                 <Viewbox Width="25">
