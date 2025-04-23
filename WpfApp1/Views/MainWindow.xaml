@@ -5,208 +5,216 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskTurner"
         xmlns:vm="clr-namespace:TaskTurner.ViewModel"
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:m="clr-namespace:TaskTurner.Models"
         xmlns:cmd="clr-namespace:TaskTurner.Infrastructure.Commands"
         mc:Ignorable="d"
         Title="MainWindow" Height="830" Width="1280"
         MinHeight="600" MinWidth="1000" ResizeMode="CanMinimize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+>
     <Window.Resources>
         <cmd:OpenNewWindowCommand x:Key="IOpenNewWindow"/>
     </Window.Resources>
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    <Grid>
-        <Grid.Triggers>
-            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                <BeginStoryboard Storyboard="{StaticResource SideOnLoad}"/>
-            </EventTrigger>
-        </Grid.Triggers>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80"/>
-            <ColumnDefinition Width="435"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="140"/>
-        </Grid.ColumnDefinitions>
-        <!--Nav Panel-->
-            <Rectangle Fill="{StaticResource AccentDark}"/>
-            <StackPanel Margin="10 15 10 10">
-                <Button Style="{StaticResource NavButton}">
-                    <Viewbox>
-                        <Path Data="{StaticResource ItemIcon}" Fill="White"/>
-                    </Viewbox>
-                </Button>
-            <Button Style="{StaticResource NavButton}">
-                <Viewbox>
-                    <Path Data="{StaticResource MarkIcon}" Fill="White"/>
-                </Viewbox>
-            </Button>
-            <Button Style="{StaticResource NavButton}">
-                <Viewbox>
-                    <Path Data="{StaticResource TimerIcon}" Fill="White"/>
-                </Viewbox>
-            </Button>
-        </StackPanel>
-            
-
-        <!--Task List Background-->
-        <Rectangle Fill="{StaticResource TaskListBackground}" Grid.Column="1"/>
-
-        <!--Task Status Bar-->
-        <Rectangle Fill="{StaticResource TaskStatusBackground}"
-   Grid.Column="3"/>
-
-        <!--Task list grid-->
-        <Grid Grid.Column="1"
-              Margin="20 0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="45"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-
-            <!--Title-->
-            <Label Content="Tasks"
-                   Style="{StaticResource Header1}"/>
-            <!--Button-->
-            <Button Style="{StaticResource RoundButton}"
-                    Width="40" Height="40" HorizontalAlignment="Right"
-                    Command="{StaticResource IOpenNewWindow}">
-
-                <!--Icon-->
-                <Viewbox Width="25">
-                    <Path Data="{StaticResource NewTaskIcon}" Fill="{StaticResource OnAccent}"/>
-                </Viewbox>
-            </Button>
-
-            <TextBox x:Name="TaskSearchBox"
-                     Grid.Row="1"
-                     Style="{StaticResource TaskListSearchBox}"
-                     />
-
-            <Button Style="{StaticResource SearchButton}"
-                Grid.Row="1"
-                    HorizontalAlignment="Right"
-                    Margin="0 0 20 0"
-                    Width="25"
-                    Height="25">
-
-                <Viewbox Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Path Data="{StaticResource SearchIcon}" Fill="{StaticResource Borders}"/>
-                </Viewbox>
-            </Button>
-
-            <Label Style="{StaticResource LabelForTextBox}"
-                   Content="Search task..."   
-                   Grid.Row="1"
-                   Margin="23 0 55 0"
-                   VerticalAlignment="Center"
-                   Visibility="{Binding Text.IsEmpty, ElementName=TaskSearchBox, Converter={StaticResource BooleanToVisibilityConverter}}"
-                   />
-            <!--Task List For Task Items-->
-            <ListView Grid.Row="2"
-                      Background="Transparent"
-                      Margin="0 20"
-                      BorderBrush="Transparent">
-
-            </ListView>
-        </Grid>
-
-        <!--Task Viewer-->
-        <Grid Grid.Column="2"
-              Margin="20 0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="230"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="60"/>
-            </Grid.RowDefinitions>
-
-            <!--Task Details-->
+    <TabControl TabStripPlacement="Left" BorderThickness="0" Background="Transparent" BorderBrush="Transparent">
+        <TabItem Width="60"  Style="{StaticResource TabItemStyle}" BorderBrush="Transparent">
+            <TabItem.Header>
+                <fa:ImageAwesome Height="40" Icon="Solid_List" Foreground="{StaticResource OnAccent}" VerticalAlignment="Top" Margin="0 30 0 0"/>
+            </TabItem.Header>
+            <!--First Tab Item-->
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="30"/>
-                </Grid.RowDefinitions>
-
-                <TextBlock Text="Task Title"
-                           Style="{StaticResource Title}"/>
-
-                <!--Importance badge-->
-                <Border HorizontalAlignment="Right"
-                        VerticalAlignment="Center"
-                        Padding="20 5"
-                        CornerRadius="7"
-                        Background="{StaticResource Importance-Crit}">
-                    <TextBlock Text="Critical"
-                               FontSize="18"/>
-                </Border>
-
-                <!--Description-->
-                <ScrollViewer Grid.Row="1"
-                              VerticalScrollBarVisibility="Auto"
-                              HorizontalScrollBarVisibility="Disabled">
-                    <TextBlock Text="This is a short description test."
-                               Foreground="{StaticResource DefaultText}"
-                               Margin="0 10"
-                               TextWrapping="Wrap">
-                    </TextBlock>
-                </ScrollViewer>
-
-                <!--Due Date-->
-                <TextBlock Text="Due: 15/04/2025"
-                           Background="{StaticResource AccentDark}"
-                           Padding="20 3"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Left"
-                           Grid.Row="2"
-                           Foreground="{StaticResource TextAccent}"/>
-
-            </Grid>
-            
-            <!--List's Information grid-->
-            <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-                
-                <!--Task Title-->
-                <TextBlock Style="{StaticResource Title}"
-                           Text="Task Check List"
-                           VerticalAlignment="Top"
-                           Margin="0 20 0 0"/>
-
-                <!--Check Lists-->
-                <ListView Background="Transparent"
-                          BorderThickness="0"
-                          Margin="0 20 0 0">
-
-                </ListView>
-            </Grid>
-            
-            <!--Buttons-->
-            <Grid Grid.Row="2">
+                <Grid.Triggers>
+                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                        <BeginStoryboard Storyboard="{StaticResource SideOnLoad}"/>
+                    </EventTrigger>
+                </Grid.Triggers>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="435"/>
                     <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="140"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0"
-                        Style="{StaticResource ButtonEdit}"
-                        Content="Edit"
+
+                <!--Task List Background-->
+                <Rectangle Fill="{StaticResource TaskListBackground}" Grid.Column="0"/>
+
+                <!--Task Status Bar-->
+                <Rectangle Fill="{StaticResource TaskStatusBackground}"
+                           Grid.Column="2"/>
+                
+                <!--TaskViewer-->
+                <Rectangle Fill="White"
+                            Grid.Column="1"/>
+
+                <!--Task list grid-->
+                <Grid Grid.Column="0"
+           Margin="20 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="45"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <!--Title-->
+                    <Label Content="Tasks"
+                Style="{StaticResource Header1}"/>
+                    <!--Button-->
+                    <Button Style="{StaticResource RoundButton}"
+                 Width="40" Height="40" HorizontalAlignment="Right"
+                 Command="{StaticResource IOpenNewWindow}">
+
+                        <!--Icon-->
+                        <Viewbox Width="25">
+                            <Path Data="{StaticResource NewTaskIcon}" Fill="{StaticResource OnAccent}"/>
+                        </Viewbox>
+                    </Button>
+
+                    <TextBox x:Name="TaskSearchBox"
+                  Grid.Row="1"
+                  Style="{StaticResource TaskListSearchBox}"
+                  />
+
+                    <Button Style="{StaticResource SearchButton}"
+             Grid.Row="1"
+                 HorizontalAlignment="Right"
+                 Margin="0 0 20 0"
+                 Width="25"
+                 Height="25">
+
+                        <Viewbox Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Path Data="{StaticResource SearchIcon}" Fill="{StaticResource Borders}"/>
+                        </Viewbox>
+                    </Button>
+
+                    <Label Style="{StaticResource LabelForTextBox}"
+                Content="Search task..."   
+                Grid.Row="1"
+                Margin="23 0 55 0"
+                VerticalAlignment="Center"
+                Visibility="{Binding Text.IsEmpty, ElementName=TaskSearchBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                />
+                    <!--Task List For Task Items-->
+                    <ListView Grid.Row="2"
+                   Background="Transparent"
+                   Margin="0 20"
+                   BorderBrush="Transparent">
+
+                    </ListView>
+                </Grid>
+
+                <!--Task Viewer-->
+                <Grid Grid.Column="1"
+                      Margin="20 0"
+                      >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="230"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+
+                    <!--Task Details-->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Task Title"
+                        Style="{StaticResource Title}"/>
+
+                        <!--Importance badge-->
+                        <Border HorizontalAlignment="Right"
+                     VerticalAlignment="Center"
+                     Padding="20 5"
+                     CornerRadius="7"
+                     Background="{StaticResource Importance-Crit}">
+                            <TextBlock Text="Critical"
+                            FontSize="18"/>
+                        </Border>
+
+                        <!--Description-->
+                        <ScrollViewer Grid.Row="1"
+                           VerticalScrollBarVisibility="Auto"
+                           HorizontalScrollBarVisibility="Disabled">
+                            <TextBlock Text="This is a short description test."
+                            Foreground="{StaticResource DefaultText}"
+                            Margin="0 10"
+                            TextWrapping="Wrap">
+                            </TextBlock>
+                        </ScrollViewer>
+
+                        <!--Due Date-->
+                        <TextBlock Text="Due: 15/04/2025"
+                        Background="{StaticResource AccentDark}"
+                        Padding="20 3"
+                        VerticalAlignment="Center"
                         HorizontalAlignment="Left"
-                        />
-                <Button Grid.Column="1"
-                        Style="{StaticResource ButtonDelete}"
-                        Content="Delete"
-                        HorizontalAlignment="Left"/>
-                <Button Grid.Column="2"
-                        Style="{StaticResource ButtonComplete}"
-                        Content="Complete"
-                        HorizontalAlignment="Right"/>
+                        Grid.Row="2"
+                        Foreground="{StaticResource TextAccent}"/>
+
+                    </Grid>
+
+                    <!--List's Information grid-->
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+
+                        <!--Task Title-->
+                        <TextBlock Style="{StaticResource Title}"
+                        Text="Task Check List"
+                        VerticalAlignment="Top"
+                        Margin="0 20 0 0"/>
+
+                        <!--Check Lists-->
+                        <ListView Background="Transparent"
+                       BorderThickness="0"
+                       Margin="0 20 0 0">
+
+                        </ListView>
+                    </Grid>
+
+                    <!--Buttons-->
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0"
+                     Style="{StaticResource ButtonEdit}"
+                     Content="Edit"
+                     HorizontalAlignment="Left"
+                     />
+                        <Button Grid.Column="1"
+                     Style="{StaticResource ButtonDelete}"
+                     Content="Delete"
+                     HorizontalAlignment="Left"/>
+                        <Button Grid.Column="2"
+                     Style="{StaticResource ButtonComplete}"
+                     Content="Complete"
+                     HorizontalAlignment="Right"/>
+                    </Grid>
+                </Grid>
             </Grid>
-        </Grid>
-    </Grid>
+        </TabItem>
+        
+        <!--Second Tab Item-->
+        <TabItem Width="60" Style="{StaticResource TabItemStyle}">
+            <TabItem.Header>
+                <fa:ImageAwesome Height="40" Icon="Solid_Search" Foreground="{StaticResource OnAccent}" VerticalAlignment="Top" Margin="0 50 0 0"/>
+            </TabItem.Header>
+        </TabItem>
+
+        <!--Third Tab Item-->
+        <TabItem Width="60" Height="666" Style="{StaticResource TabItemStyle}">
+            <TabItem.Header>
+                <fa:ImageAwesome Height="40" Icon="Regular_Clock" Foreground="{StaticResource OnAccent}" VerticalAlignment="Top" Margin="0 50 0 0"/>
+            </TabItem.Header>
+        </TabItem>
+    </TabControl>
 </Window>
