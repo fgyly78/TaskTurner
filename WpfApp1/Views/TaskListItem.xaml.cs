@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TaskTurner.ViewModel;
 
 namespace TaskTurner.Views
 {
@@ -24,5 +25,15 @@ namespace TaskTurner.Views
         {
             InitializeComponent();
         }
+
+        public Task Task
+        {
+            get { return (Task)GetValue(TaskProperty); }
+            set { SetValue(TaskProperty, value); }
+        }
+
+        // DependencyProperty для привязки задачи
+        public static readonly DependencyProperty TaskProperty =
+            DependencyProperty.Register("Task", typeof(Task), typeof(TaskListItem), new PropertyMetadata(null));
     }
 }

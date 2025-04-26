@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TaskTurner.Views"
+             xmlns:viewmodel="clr-namespace:TaskTurner.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainWindowViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="145" d:DesignWidth="395">
     <Grid>
@@ -14,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <TextBlock Style="{StaticResource Title}"
-                   Text="Title"
+                   Text="{Binding NewTaskTitle}"
                    Grid.Row="0"/>
 
         <Border HorizontalAlignment="Right"

@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TaskTurner.Views" xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:local="clr-namespace:TaskTurner.Views" 
+        xmlns:viewmodel="clr-namespace:TaskTurner.ViewModel" 
+        d:DataContext="{d:DesignInstance Type=viewmodel:MainWindowViewModel}"
         mc:Ignorable="d"
         PreviewMouseDown="Window_PreviewMouseDown"
         Title="NewTaskWindow" Height="450" Width="400">
@@ -26,7 +28,8 @@
                 <!--Title-->
                 <Grid Grid.Row="0" Grid.Column="0">
                     <TextBox x:Name="InputTitleBox" 
-                    Style="{StaticResource TaskListSearchBox}">
+                             Style="{StaticResource TaskListSearchBox}"
+                             Text="{Binding NewTaskTitle, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
 
                     </TextBox>
                     <Label Content="Input task's name" Grid.Column="0"
@@ -95,7 +98,7 @@
                     Style="{StaticResource ButtonComplete}"
                     Content="Add task"
                     HorizontalAlignment="Right"
-                    Command="{Binding IAddTaskCommand}">
+                    Command="{Binding AddTaskCommand}">
             </Button>
         </Grid>
     </Grid>
