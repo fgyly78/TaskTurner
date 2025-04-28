@@ -24,10 +24,9 @@ namespace TaskTurner.Infrastructure.Commands
             if (_openedWindow == null || !_openedWindow.IsVisible)
             {
                 _openedWindow = new NewTaskWindow();
-                _openedWindow.Closed += (s, e) => CommandManager.InvalidateRequerySuggested(); // Обновить CanExecute
+                _openedWindow.Closed += (s, e) => CommandManager.InvalidateRequerySuggested();
                 _openedWindow.Show();
 
-                // Уведомляем систему, что статус CanExecute мог измениться
                 CommandManager.InvalidateRequerySuggested();
             }
         }

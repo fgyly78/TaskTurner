@@ -111,6 +111,7 @@
                       Margin="0 20"
                       BorderBrush="Transparent"
                       ItemsSource="{Binding Tasks}"
+                      SelectedItem="{Binding SelectedTask, Mode=TwoWay}"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.ItemTemplate>
@@ -211,7 +212,8 @@
                 <Button Grid.Column="1"
                         Style="{StaticResource ButtonDelete}"
                         Content="Delete"
-                        HorizontalAlignment="Left"/>
+                        HorizontalAlignment="Left"
+                        Command="{Binding DeleteTaskCommand}"/>
                 <Button Grid.Column="2"
                         Style="{StaticResource ButtonComplete}"
                         Content="Complete"
