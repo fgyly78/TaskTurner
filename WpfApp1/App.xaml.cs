@@ -22,10 +22,10 @@ namespace TaskTurner
             using (ApplicationContext db = new ApplicationContext())
             {
                 var tasks = db.Tasks.ToList();
-                Console.WriteLine("tasks");
-                foreach (Task u in tasks)
+                Console.WriteLine("Tasks");
+                foreach (MyTask u in tasks)
                 {
-                    Console.WriteLine($"{u.Id}.{u.Title}");
+                    Console.WriteLine($"{u.Id}.{u.Title}.{u.Description}.{u.DueDate}.{u.StartDate}.{u.Timer}.{u.TaskState}.{u.TaskImportance}");
                 }
             }
         }

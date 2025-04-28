@@ -4,12 +4,24 @@ using TaskTurner;
 using TaskTurner.Models;
 
 
-public class ApplicationContext : DbContext
+public class ApplicationContext : BaseDBContext
 {
-    public DbSet<Task> Tasks { get; set; } = null!;
+    public DbSet<MyTask> Tasks { get; set; } = null!;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=task_manager;Username=postgres;Password=Allstars1051");
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<MyTask>()
+            .Property(t => t.TaskState)
+            .HasConversion<string>();
+
+        modelBuilder.Entity<MyTask>()
+            .Property(t => t.TaskImportance)
+            .HasConversion<string>();
+    }
+
 }

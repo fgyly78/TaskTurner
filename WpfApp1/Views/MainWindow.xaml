@@ -114,9 +114,11 @@
                       ScrollViewer.VerticalScrollBarVisibility="Hidden"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.ItemTemplate>
-                    <DataTemplate DataType="{x:Type local:Task}">
-                        <v:TaskListItem Width="380" Height="145"
-                                        DataContext="{Binding}"></v:TaskListItem>
+                    <DataTemplate>
+                        <v:TaskListItem Width="380"
+                                        Height="145"
+                                        Task="{Binding}">
+                        </v:TaskListItem>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
@@ -144,12 +146,11 @@
 
                 <!--Importance badge-->
                 <Border HorizontalAlignment="Right"
-                        VerticalAlignment="Center"
-                        Padding="20 5"
-                        CornerRadius="7"
-                        Background="{StaticResource Importance-Crit}">
+        Style="{StaticResource ImportanceBadge}"
+        Background="{StaticResource Importance-Category}">
                     <TextBlock Text="Critical"
-                               FontSize="18"/>
+               Foreground="#FFF9EACE"
+               FontSize="16"/>
                 </Border>
 
                 <!--Description-->

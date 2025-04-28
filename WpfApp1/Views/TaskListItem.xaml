@@ -3,8 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TaskTurner.Views"
-             xmlns:viewmodel="clr-namespace:TaskTurner.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainWindowViewModel}"
+             xmlns:local="clr-namespace:TaskTurner"
+             xmlns:vm="clr-namespace:TaskTurner.ViewModel"
+             xmlns:m="clr-namespace:TaskTurner.Models"
+             xmlns:v="clr-namespace:TaskTurner.Views" 
+             d:DataContext="{d:DesignInstance Type=m:MyTask}"
              mc:Ignorable="d" 
              d:DesignHeight="145" d:DesignWidth="395">
     <Grid>
@@ -15,22 +18,22 @@
         </Grid.RowDefinitions>
 
         <TextBlock Style="{StaticResource Title}"
-                   Text="{Binding NewTaskTitle}"
+                   Text="{Binding Title}"
                    Grid.Row="0"/>
 
         <Border HorizontalAlignment="Right"
                 Style="{StaticResource ImportanceBadge}"
                 Background="{StaticResource Importance-Category}">
-            <TextBlock Text="Critical"
+            <TextBlock Text="{Binding TaskImportance}"
                        Foreground="#FFF9EACE"
                        FontSize="13"/>
         </Border>
 
         <TextBlock Grid.Row="1"
-                   Text="Text"
+                   Text="{Binding Description}"
                    Style="{StaticResource DefaulText1}"/>
 
-        <TextBlock Text="Due: 16/04/2025"
+        <TextBlock Text="{Binding DueDate}"
                    Grid.Row="2"
                    VerticalAlignment="Center"
                    Style="{StaticResource DefaulText1}"/>
