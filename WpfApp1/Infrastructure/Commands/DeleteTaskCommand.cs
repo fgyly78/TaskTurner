@@ -19,7 +19,7 @@ namespace TaskTurner.Infrastructure.Commands
 
         public override bool CanExecute(object parameter)
         {
-            // Можем удалить только если задача выбрана
+            
             return _viewModel.SelectedTask != null;
         }
 

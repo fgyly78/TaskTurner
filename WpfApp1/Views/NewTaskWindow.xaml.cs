@@ -25,44 +25,5 @@ namespace TaskTurner.Views
             DataContext = new MainWindowViewModel();
         }
 
-        private void Window_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            var clickedElement = Mouse.DirectlyOver as DependencyObject;
-
-            if (!IsDescendantOf(clickedElement, ImportancePanelContainer) &&
-                !IsDescendantOf(clickedElement, ImportanceToggleButton))
-            {
-                ImportancePanelContainer.Visibility = Visibility.Collapsed;
-            }
-        }
-
-        private bool IsDescendantOf(DependencyObject child, DependencyObject parent)
-        {
-            while (child != null)
-            {
-                if (child == parent)
-                    return true;
-                child = VisualTreeHelper.GetParent(child);
-            }
-            return false;
-        }
-
-        private void ImportanceToggleButton_Click(object sender, RoutedEventArgs e)
-        {
-            ImportancePanelContainer.Visibility =
-                ImportancePanelContainer.Visibility == Visibility.Visible
-                ? Visibility.Collapsed
-                : Visibility.Visible;
-        }
-
-        private void ImportanceButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender is Button btn)
-            {
-                ImportanceToggleButton.Content = btn.Content;
-
-                ImportancePanelContainer.Visibility = Visibility.Collapsed;
-            }
-        }
     }
 }

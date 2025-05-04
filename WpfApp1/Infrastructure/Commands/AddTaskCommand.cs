@@ -43,7 +43,7 @@ namespace TaskTurner.Infrastructure.Commands
             db.SaveChanges();
 
             vm.Tasks.Add(task);
-            vm.NewTaskTitle = string.Empty;
+            vm.ResetTaskFields();
             CommandManager.InvalidateRequerySuggested();
         }
 

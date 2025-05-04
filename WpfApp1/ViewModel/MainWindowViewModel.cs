@@ -45,7 +45,7 @@ namespace TaskTurner.ViewModel
             NewTaskStartDate = DateTime.Now;
             NewTaskTimer = TimeSpan.Zero;
             NewTaskState = TaskState.NotStarted;
-            NewTaskImportance = TaskImportance.Low;
+            NewTaskImportance = TaskImportance.Default;
         }
 
         public void DeleteSelectedTask()
@@ -77,6 +77,8 @@ namespace TaskTurner.ViewModel
         private ObservableCollection<MyTask> _tasks;
         private MyTask _selectedTask;
         private ICommand _addTaskCommand;
+        private DateTime _defaultTime = DateTime.Now;
+        
         #endregion
 
         #region Properties
@@ -87,6 +89,11 @@ namespace TaskTurner.ViewModel
         public TimeSpan NewTaskTimer { get => _timer; set => Set(ref _timer, value); }
         public TaskState NewTaskState { get => _taskState; set => Set(ref _taskState, value); }
         public TaskImportance NewTaskImportance { get => _taskImportance; set => Set(ref _taskImportance, value); }
+        public DateTime DefaultTime
+        {
+            get => _defaultTime;
+            set => Set(ref _defaultTime, value);
+        }
 
         public ObservableCollection<MyTask> Tasks { get => _tasks; set => Set(ref _tasks, value); }
 
@@ -95,6 +102,9 @@ namespace TaskTurner.ViewModel
             get => _selectedTask;
             set => Set(ref _selectedTask, value);
         }
+
+        public IEnumerable<TaskImportance> ImportanceOptions =>
+    Enum.GetValues(typeof(TaskImportance)).Cast<TaskImportance>();
         #endregion
     }
 }

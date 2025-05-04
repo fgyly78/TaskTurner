@@ -33,7 +33,7 @@
                    Text="{Binding Description}"
                    Style="{StaticResource DefaulText1}"/>
 
-        <TextBlock Text="{Binding DueDate}"
+        <TextBlock Text="{Binding DueDate, StringFormat=dd.MM.yyyy}"
                    Grid.Row="2"
                    VerticalAlignment="Center"
                    Style="{StaticResource DefaulText1}"/>

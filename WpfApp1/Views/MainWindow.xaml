@@ -142,14 +142,14 @@
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Task Title"
+                <TextBlock Text="{Binding SelectedTask.Title, FallbackValue='Title'}" 
                            Style="{StaticResource Title}"/>
 
                 <!--Importance badge-->
                 <Border HorizontalAlignment="Right"
         Style="{StaticResource ImportanceBadge}"
         Background="{StaticResource Importance-Category}">
-                    <TextBlock Text="Critical"
+                    <TextBlock Text="{Binding SelectedTask.TaskImportance, FallbackValue='Category'}"
                Foreground="#FFF9EACE"
                FontSize="16"/>
                 </Border>
@@ -158,7 +158,7 @@
                 <ScrollViewer Grid.Row="1"
                               VerticalScrollBarVisibility="Auto"
                               HorizontalScrollBarVisibility="Disabled">
-                    <TextBlock Text="This is a short description test."
+                    <TextBlock Text="{Binding SelectedTask.Description, FallbackValue='This is a short description test.'}"
                                Foreground="{StaticResource DefaultText}"
                                Margin="0 10"
                                TextWrapping="Wrap">
@@ -166,7 +166,7 @@
                 </ScrollViewer>
 
                 <!--Due Date-->
-                <TextBlock Text="Due: 15/04/2025"
+                <TextBlock Text="{Binding SelectedTask.DueDate, StringFormat=dd.MM.yyyy, FallbackValue='Due date: '}"
                            Background="{StaticResource AccentDark}"
                            Padding="20 3"
                            VerticalAlignment="Center"
